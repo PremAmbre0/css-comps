@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>password-strength</title>
+    <style>
+      body{
+          height: 100vh;
+          width: 100vw;
+          margin: 0;
+          border: 0;
+          box-sizing: border-box;
+          position: relative;
+      }
+      .bg-image{
+        background-image: url("kobe.jpg") ;
+        background-size: cover;
+        height: 100vh;
+        width:100vw;
+        filter: blur(10px);
+        position: fixed;
+      }
+      .form {
+        font-size: 20px;
+        background-color: #fff;
+        padding: 30px;
+        height: 300px;
+        width: 200px;
+        border-radius: 10px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+      }
+      input{
+          margin:10px 0;
+      }
+    </style>
+  </head>
+  <body><div class="bg-image"></div>
+    <form class="form">
+        <h4>
+            Image Password Strength
+        </h4>
+        <p>Change the password to see the effect</p>
+        <label for="email">Email:
+            <input type="email" name="email" id="email">
+        </label>
+        <label for="password">Password:
+            <input type="password" name="password" id="password">
+        </label>
+    </form>
+
+    <script>
+
+        const passwordElement= document.getElementById('password')
+        const bgImg = document.querySelector('.bg-image')
+
+        password.oninput = () =>{
+            const password = passwordElement.value
+
+            strength = checkStrength(password)
+            const blurValue = 20 - strength
+            bgImg.style.filter = `blur(${blurValue}px)`
+        }
+
+        function checkStrength(password) {
+            strength = 0
+            // password length
+            if(password.length>=5 || password.length<=20 ){
+                strength+=4
+            }
+            // lower case 
+            lower = /[a-z]/
+            if (lower.test(password)){
+                strength+=4
+            } 
+            // upper case
+            upper = /[A-Z]/
+            if(upper.test(password)){
+                strength+=4
+            }
+            // special character
+            special = /[^a-zA-Z0-9]/
+            if(special.test(password)){
+                strength+=4
+            }
+            // Number
+            nums = /[0-9]/
+            if(nums.test(password)){
+                strength+=4
+            }
+
+            return strength
+        }
+    </script>
+  </body>
+</html>

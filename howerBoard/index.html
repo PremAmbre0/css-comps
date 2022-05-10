@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width= , initial-scale=1.0">
+
+    <title>hover board</title>
+    
+    <style>
+        body{
+            background-color: #222;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #container{
+            max-width: 300px;
+            max-height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            overflow: hidden;
+            padding: 5px;
+        }
+        .square{
+            background-color: rgb(68, 68, 68);
+            height: 15px;
+            width: 15px;
+            margin: 3px;
+            box-shadow: 0px 0px 3px black;
+            transition: all 3s ease ;
+        }
+
+        .square:hover{
+            transition-duration: 0s;
+        }
+    </style>
+</head>
+<body>
+    
+    <div id="container"></div>
+ 
+    <script>
+        const conatiner = document.getElementById("container");
+
+        const colors = ["#FF00E4","#49FF00","#0CECDD","#0CECDD","#E71414","#FFD36E","#9FB4FF","#FF6B6B","#EFEFEF"];
+
+        const x = 1000;
+
+        for (let i = 0; i < x; i++) {
+            const square = document.createElement('div')
+            square.classList.add('square'); 
+
+            square.addEventListener('mouseover', () =>addColor(square))
+
+            square.addEventListener('mouseout', () =>removeColor(square))
+
+            conatiner.appendChild(square);
+        }
+
+
+        function addColor(ele) {
+            color = colorSelector()
+
+            ele.style.background = `${color}`
+            ele.style.boxShadow = `0px 0px 20px 
+            ${color}`
+        }
+
+        function removeColor(ele) {
+            ele.style.background = "rgb(68, 68, 68)";
+            ele.style.boxShadow = "0px 0px 3px black"
+          }
+        function colorSelector(){
+            return colors[Math.floor(Math.random()*colors.length)]
+        }
+
+    </script>
+</body>
+</html>
